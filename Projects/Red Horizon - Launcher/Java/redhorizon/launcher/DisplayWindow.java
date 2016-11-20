@@ -33,7 +33,6 @@ public abstract class DisplayWindow extends Window {
 	 * @param renderer Listener for the rendering event.
 	 */
 	protected DisplayWindow(DisplayRenderer renderer) {
-
 		this.renderer = renderer;
 	}
 }

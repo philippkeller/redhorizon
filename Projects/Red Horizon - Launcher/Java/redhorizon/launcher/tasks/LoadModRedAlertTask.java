@@ -16,6 +16,7 @@
 
 package redhorizon.launcher.tasks;
 
+import java.io.IOException;
 import java.nio.file.Paths;
 
 /**
@@ -30,7 +31,7 @@ public class LoadModRedAlertTask extends LoadModTask {
 	/**
 	 * Constructor, create the load Red Alert task.
 	 */
-	public LoadModRedAlertTask() {
+	public LoadModRedAlertTask() throws IOException {
 
 		super(Paths.get(MOD_DIRECTORY, RED_ALERT_MOD_DIRECTORY));
 	}

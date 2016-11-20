@@ -21,6 +21,7 @@ import redhorizon.resourcemanager.ResourceManager;
 import redhorizon.resourcemanager.scanner.DirectoryScanner;
 import redhorizon.ui.SplashScreenTask;
 
+import java.io.IOException;
 import java.nio.file.Path;
 
 /**
@@ -42,7 +43,7 @@ public abstract class LoadModTask implements SplashScreenTask {
 	 * 
 	 * @param modpath Path to the location of the mod to have loaded.
 	 */
-	protected LoadModTask(Path modpath) {
+	protected LoadModTask(Path modpath) throws IOException {
 
 		this.modpath = modpath;
 
@@ -56,10 +57,13 @@ public abstract class LoadModTask implements SplashScreenTask {
 	 */
 	@Override
 	public void doTask() {
-
-		MixFileScannerListener mixfilescannerlistener = new MixFileScannerListener();
-		new DirectoryScanner(modpath.toString(), mixfilescannerlistener).scan();
-		ResourceManager.addResourceLocator(MIX_FILE_RESOURCE_LOCATOR, mixfilescannerlistener);
+		try {
+			MixFileScannerListener mixfilescannerlistener = new MixFileScannerListener();
+			new DirectoryScanner(modpath.toString(), mixfilescannerlistener).scan();
+			ResourceManager.addResourceLocator(MIX_FILE_RESOURCE_LOCATOR, mixfilescannerlistener);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

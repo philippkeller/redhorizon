@@ -24,6 +24,7 @@ import redhorizon.filetypes.png.PngFile;
 import redhorizon.utilities.CodecUtility;
 import redhorizon.utilities.channels.ReadableByteChannelAdapter;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.GatheringByteChannel;
@@ -76,7 +77,7 @@ public class WsaFileDune2 extends WsaFile<WsaFileHeaderDune2> implements Palette
 	 * @param name		  The name of this file.
 	 * @param filechannel Channel into the file.
 	 */
-	public WsaFileDune2(String name, FileChannel filechannel) {
+	public WsaFileDune2(String name, FileChannel filechannel) throws IOException {
 
 		super(name);
 
@@ -134,7 +135,7 @@ public class WsaFileDune2 extends WsaFile<WsaFileHeaderDune2> implements Palette
 	 * @param params  Additional parameters: width, height, numimgs, framerate,
 	 * 				  looping.
 	 */
-	public WsaFileDune2(String name, PngFile pngfile, String... params) {
+	public WsaFileDune2(String name, PngFile pngfile, String... params) throws IOException {
 
 		super(name, pngfile, params);
 	}
@@ -227,7 +228,7 @@ public class WsaFileDune2 extends WsaFile<WsaFileHeaderDune2> implements Palette
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void write(GatheringByteChannel outputchannel) {
+	public void write(GatheringByteChannel outputchannel) throws IOException {
 
 		int numimages = numImages();
 

@@ -24,6 +24,7 @@ import redhorizon.filetypes.Paletted;
 import redhorizon.filetypes.png.PngFile;
 import redhorizon.media.Palette;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
 import java.util.Arrays;
@@ -198,7 +199,7 @@ public class ImageUtility {
 	 * @return Single combined image data.
 	 */
 	public static ByteBuffer combineImages(int combinewidth, int combineheight,
-		ImagesFile imagesfile, Palette palette) {
+		ImagesFile imagesfile, Palette palette) throws IOException {
 
 		int width  = imagesfile.width();
 		int height = imagesfile.height();
@@ -318,7 +319,7 @@ public class ImageUtility {
 	 * 		   evenly as requested.
 	 */
 	public static ByteBuffer[] splitImage(int splitwidth, int splitheight, int numimages,
-		ImageFile imagefile) {
+		ImageFile imagefile) throws IOException {
 
 		return splitImage(splitwidth, splitheight, numimages,
 				imagefile.width(), imagefile.height(), imagefile.format(), imagefile.getImageData());
@@ -346,7 +347,7 @@ public class ImageUtility {
 	 * 		   evenly as requested.
 	 */
 	public static ByteBuffer[] splitImage(int splitwidth, int splitheight, int numimages,
-		int srcwidth, int srcheight, ColourFormat format, ReadableByteChannel srcimage) {
+		int srcwidth, int srcheight, ColourFormat format, ReadableByteChannel srcimage) throws IOException {
 
 		ByteBuffer srcbytes = BufferUtility.readRemaining(srcimage);
 

@@ -72,7 +72,7 @@ public class WsaFileCNC extends WsaFile<WsaFileHeaderCNC> implements PalettedInt
 	 * @param name		  The name of this file.
 	 * @param bytechannel The data of the file.
 	 */
-	public WsaFileCNC(String name, ReadableByteChannel bytechannel) {
+	public WsaFileCNC(String name, ReadableByteChannel bytechannel) throws IOException {
 
 		super(name);
 
@@ -122,7 +122,7 @@ public class WsaFileCNC extends WsaFile<WsaFileHeaderCNC> implements PalettedInt
 	 * @param params  Additional parameters: width, height, numimgs, framerate,
 	 * 				  looping.
 	 */
-	public WsaFileCNC(String name, PngFile pngfile, String... params) {
+	public WsaFileCNC(String name, PngFile pngfile, String... params) throws IOException {
 
 		super(name, pngfile, params);
 
@@ -146,7 +146,7 @@ public class WsaFileCNC extends WsaFile<WsaFileHeaderCNC> implements PalettedInt
 	 * @param pngfiles Fully read PNG files to extract data from.
 	 * @param params   Additonal parameters: framerate, looping, nohires.
 	 */
-	public WsaFileCNC(String name, ArrayList<PngFile> pngfiles, String... params) {
+	public WsaFileCNC(String name, ArrayList<PngFile> pngfiles, String... params) throws IOException {
 
 		super(name, pngfiles.toArray(new PngFile[pngfiles.size()]), params);
 
@@ -191,7 +191,7 @@ public class WsaFileCNC extends WsaFile<WsaFileHeaderCNC> implements PalettedInt
 	 * finish.
 	 */
 	@Override
-	public void close() {
+	public void close() throws IOException {
 
 		bytechannel.close();
 		decoderthreadpool.shutdownNow();
@@ -210,7 +210,7 @@ public class WsaFileCNC extends WsaFile<WsaFileHeaderCNC> implements PalettedInt
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ReadableByteChannel getImagesData() {
+	public ReadableByteChannel getImagesData() throws IOException {
 
 		// Leverage the raw frame decoder as input to the colour decoder
 		Pipe pipe = Pipe.open();
@@ -231,7 +231,7 @@ public class WsaFileCNC extends WsaFile<WsaFileHeaderCNC> implements PalettedInt
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ReadableByteChannel getRawImageData() {
+	public ReadableByteChannel getRawImageData() throws IOException {
 
 		Pipe pipe = Pipe.open();
 		decoderthreadpool.execute(new RawFrameDecoder(
@@ -279,7 +279,7 @@ public class WsaFileCNC extends WsaFile<WsaFileHeaderCNC> implements PalettedInt
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void write(GatheringByteChannel outputchannel) {
+	public void write(GatheringByteChannel outputchannel) throws IOException {
 
 		int numimages = numImages();
 
@@ -376,7 +376,7 @@ public class WsaFileCNC extends WsaFile<WsaFileHeaderCNC> implements PalettedInt
 		 * @param lastbytes Frame data of the last frame decoded.
 		 * @return Raw decoded frame data.
 		 */
-		private ByteBuffer decodeFrame(int framenum, ByteBuffer lastbytes) {
+		private ByteBuffer decodeFrame(int framenum, ByteBuffer lastbytes) throws IOException {
 
 			int offset = wsaoffsets[framenum];
 			int sourcelength = wsaoffsets[framenum + 1] - offset;
@@ -402,7 +402,7 @@ public class WsaFileCNC extends WsaFile<WsaFileHeaderCNC> implements PalettedInt
 		 * {@inheritDoc}
 		 */
 		@Override
-		protected void decode() {
+		protected void decode() throws IOException {
 
 			ByteBuffer lastframebytes = ByteBuffer.allocate(width() * height());
 
@@ -444,7 +444,7 @@ public class WsaFileCNC extends WsaFile<WsaFileHeaderCNC> implements PalettedInt
 		 * {@inheritDoc}
 		 */
 		@Override
-		protected void decode() {
+		protected void decode() throws IOException {
 
 			ByteBuffer framebytes  = ByteBuffer.allocate(width() * height());
 			ByteBuffer colourbytes = ByteBuffer.allocate(width() * height() * format().size);

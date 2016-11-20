@@ -24,6 +24,7 @@ import redhorizon.resourcemanager.scanner.ScannerListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Path;
@@ -50,7 +51,7 @@ public class MixFileScannerListener implements ScannerListener, ResourceLocator 
 	 * Close all of the mix files tracked by this scanner.
 	 */
 	@Override
-	public void close() {
+	public void close() throws IOException {
 
 		for (MixFile mixfile: mixfiles) {
 			mixfile.close();
@@ -87,7 +88,7 @@ public class MixFileScannerListener implements ScannerListener, ResourceLocator 
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void match(Path path) {
+	public void match(Path path) throws IOException {
 
 		String mixfilename = path.getFileName().toString();
 		logger.info("Loading {}", mixfilename);

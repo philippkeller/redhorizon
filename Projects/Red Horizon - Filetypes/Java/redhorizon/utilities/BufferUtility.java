@@ -16,6 +16,7 @@
 
 package redhorizon.utilities;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class BufferUtility {
 	 * @param bytechannel
 	 * @return All remaining data in the stream.
 	 */
-	public static ByteBuffer readRemaining(ReadableByteChannel bytechannel) {
+	public static ByteBuffer readRemaining(ReadableByteChannel bytechannel) throws IOException {
 
 		ArrayList<ByteBuffer> bytes = new ArrayList<>();
 		int size = 0;

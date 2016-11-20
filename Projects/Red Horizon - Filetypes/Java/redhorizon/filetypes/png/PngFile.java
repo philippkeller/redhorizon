@@ -73,7 +73,7 @@ public class PngFile extends AbstractFile implements ImageFile, PalettedInternal
 	 * @param name		  Name of the png file.
 	 * @param bytechannel Data of the png file.
 	 */
-	public PngFile(String name, ReadableByteChannel bytechannel) {
+	public PngFile(String name, ReadableByteChannel bytechannel) throws IOException {
 
 		super(name);
 
@@ -120,7 +120,7 @@ public class PngFile extends AbstractFile implements ImageFile, PalettedInternal
 	 * @param animationfile File to source data from.
 	 * @param params		Additional parameters: external palette (opt).
 	 */
-	public PngFile(String name, AnimationFile animationfile, String... params) {
+	public PngFile(String name, AnimationFile animationfile, String... params) throws IOException {
 
 		this(name, (ImagesFile)animationfile, params);
 	}
@@ -133,7 +133,7 @@ public class PngFile extends AbstractFile implements ImageFile, PalettedInternal
 	 * @param imagesfile File to source data from.
 	 * @param params	 Additional parameters: external palette (opt).
 	 */
-	public PngFile(String name, ImagesFile imagesfile, String... params) {
+	public PngFile(String name, ImagesFile imagesfile, String... params) throws IOException {
 
 		super(name);
 
@@ -303,7 +303,7 @@ public class PngFile extends AbstractFile implements ImageFile, PalettedInternal
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void write(GatheringByteChannel outputchannel) {
+	public void write(GatheringByteChannel outputchannel) throws IOException {
 
 		// Create paletted PNG
 		if (isIndexed()) {

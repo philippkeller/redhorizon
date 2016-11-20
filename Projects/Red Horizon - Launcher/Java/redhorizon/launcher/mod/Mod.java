@@ -18,6 +18,7 @@ package redhorizon.launcher.mod;
 
 import redhorizon.filetypes.ini.IniFile;
 
+import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.util.Map;
@@ -57,7 +58,7 @@ public class Mod {
 	 * 
 	 * @param path Path to the directory or file containing the mod.
 	 */
-	public Mod(Path path) {
+	public Mod(Path path) throws IOException {
 
 		// Find Mod.ini file
 		Path modinipath = path.resolve(MOD_INI_FILE);

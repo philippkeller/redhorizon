@@ -18,6 +18,7 @@ package redhorizon.filetypes;
 
 import redhorizon.media.Palette;
 
+import java.io.IOException;
 import java.nio.channels.ReadableByteChannel;
 
 /**
@@ -42,5 +43,5 @@ public interface PalettedInternal {
 	 * 
 	 * @return The indexed image data.
 	 */
-	public ReadableByteChannel getRawImageData();
+	public ReadableByteChannel getRawImageData() throws IOException;
 }

@@ -16,6 +16,7 @@
 
 package redhorizon.resourcemanager.scanner;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.regex.Pattern;
 
@@ -34,7 +35,7 @@ public interface ScannerListener {
 	 * @param path File/directory that matched the listener pattern.
 	 * @see ScannerListener#pattern()
 	 */
-	public void match(Path path);
+	public void match(Path path) throws IOException;
 
 	/**
 	 * Regular expression pattern that the file or directory name should match

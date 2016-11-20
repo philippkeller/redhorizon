@@ -24,6 +24,7 @@ import redhorizon.filetypes.PalettedInternal;
 import redhorizon.utilities.ImageUtility;
 import static redhorizon.filetypes.ColourFormat.*;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 
 /**
@@ -68,7 +69,7 @@ public abstract class WsaFile<H extends WsaFileHeader> extends AbstractFile impl
 	 * @param params	Additonal parameters: width, height, numimgs, framerate,
 	 * 					looping.
 	 */
-	WsaFile(String name, ImageFile imagefile, String... params) {
+	WsaFile(String name, ImageFile imagefile, String... params) throws IOException {
 
 		super(name);
 
@@ -130,7 +131,7 @@ public abstract class WsaFile<H extends WsaFileHeader> extends AbstractFile impl
 	 * @param imagefiles File to source data from.
 	 * @param params	 Additonal parameters: framerate, looping, nohires.
 	 */
-	WsaFile(String name, ImageFile[] imagefiles, String... params) {
+	WsaFile(String name, ImageFile[] imagefiles, String... params) throws IOException {
 
 		super(name);
 

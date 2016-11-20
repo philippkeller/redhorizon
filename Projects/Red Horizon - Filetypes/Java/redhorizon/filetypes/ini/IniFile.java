@@ -20,6 +20,7 @@ import redhorizon.filetypes.AbstractFile;
 import redhorizon.filetypes.FileExtensions;
 import redhorizon.utilities.BufferUtility;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
 import java.util.HashMap;
@@ -43,7 +44,7 @@ public class IniFile extends AbstractFile {
 	 * @param name		  The name of this file.
 	 * @param bytechannel Channel to the INI file to read.
 	 */
-	public IniFile(String name, ReadableByteChannel bytechannel) {
+	public IniFile(String name, ReadableByteChannel bytechannel) throws IOException {
 
 		super(name);
 

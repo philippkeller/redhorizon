@@ -16,6 +16,7 @@
 
 package redhorizon.filetypes;
 
+import java.io.IOException;
 import java.nio.channels.ReadableByteChannel;
 
 /**
@@ -51,5 +52,5 @@ public interface SoundFile extends File {
 	 * 
 	 * @return Byte channel containin the sound data.
 	 */
-	public ReadableByteChannel getSoundData();
+	public ReadableByteChannel getSoundData() throws IOException;
 }

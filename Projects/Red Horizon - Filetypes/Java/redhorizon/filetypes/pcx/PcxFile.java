@@ -30,6 +30,7 @@ import redhorizon.utilities.ImageUtility;
 import redhorizon.utilities.channels.ReadableByteChannelAdapter;
 import static redhorizon.filetypes.ColourFormat.FORMAT_RGB;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class PcxFile extends AbstractFile implements ImageFile, PalettedInternal
 	 * @param name		  Name of the pcx file.
 	 * @param bytechannel Input stream of the pcx file data.
 	 */
-	public PcxFile(String name, ReadableByteChannel bytechannel) {
+	public PcxFile(String name, ReadableByteChannel bytechannel) throws IOException {
 
 		super(name);
 

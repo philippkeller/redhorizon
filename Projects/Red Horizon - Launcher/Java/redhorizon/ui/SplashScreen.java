@@ -26,6 +26,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
@@ -54,7 +55,7 @@ public class SplashScreen extends Window {
 	 * @param text
 	 * @param version
 	 */
-	public SplashScreen(InputStream imageinputstream, String text, String version) {
+	public SplashScreen(InputStream imageinputstream, String text, String version) throws InterruptedException, IOException {
 
 		this(imageinputstream, text, version, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
@@ -69,7 +70,7 @@ public class SplashScreen extends Window {
 	 * @param width
 	 * @param height
 	 */
-	public SplashScreen(InputStream imageinputstream, String text, String version, int width, int height) {
+	public SplashScreen(InputStream imageinputstream, String text, String version, int width, int height) throws IOException {
 
 		super(SWT.ON_TOP);
 
@@ -117,8 +118,8 @@ public class SplashScreen extends Window {
 						@Override
 						public void run() {
 							Thread.currentThread().setName("Splash Screen task execution thread");
-							Thread.sleep(1000);
 							try {
+								Thread.sleep(1000);
 								for (SplashScreenTask task: tasks) {
 									executeTask(task);
 									Thread.sleep(500);

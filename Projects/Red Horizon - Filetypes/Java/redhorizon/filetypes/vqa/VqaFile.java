@@ -34,6 +34,7 @@ import static redhorizon.filetypes.SoundChannels.*;
 import static redhorizon.filetypes.vqa.VqaChunkTypes.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.Pipe;
@@ -73,7 +74,7 @@ public class VqaFile extends AbstractFile implements VideoFile {
 	 * @param name		  The name of this file.
 	 * @param bytechannel The data of this file.
 	 */
-	public VqaFile(String name, ReadableByteChannel bytechannel) {
+	public VqaFile(String name, ReadableByteChannel bytechannel) throws IOException {
 
 		super(name);
 
@@ -141,7 +142,7 @@ public class VqaFile extends AbstractFile implements VideoFile {
 	 * Does nothing.
 	 */
 	@Override
-	public void close() {
+	public void close() throws IOException {
 
 		bytechannel.close();
 		decoderthreadpool.shutdownNow();
@@ -180,7 +181,7 @@ public class VqaFile extends AbstractFile implements VideoFile {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ReadableByteChannel getImagesData() {
+	public ReadableByteChannel getImagesData() throws IOException {
 
 		Pipe pipe = Pipe.open();
 		decoderthreadpool.execute(new ImageDataDecoder(
@@ -192,7 +193,7 @@ public class VqaFile extends AbstractFile implements VideoFile {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ReadableByteChannel getSoundData() {
+	public ReadableByteChannel getSoundData() throws IOException {
 
 		Pipe pipe = Pipe.open();
 		decoderthreadpool.execute(new SoundDataDecoder(
@@ -225,7 +226,7 @@ public class VqaFile extends AbstractFile implements VideoFile {
 	 * @param inputchannel Channel to use with which to find the next chunk.
 	 * @return The next <tt>VqaChunk</tt>.
 	 */
-	private static VqaChunkHeader readNextChunk(ReadableByteChannel inputchannel) {
+	private static VqaChunkHeader readNextChunk(ReadableByteChannel inputchannel) throws IOException {
 
 		ByteBuffer nullbyte = ByteBuffer.allocate(1);
 		VqaChunkHeader vqachunk;
@@ -281,7 +282,7 @@ public class VqaFile extends AbstractFile implements VideoFile {
 		 * {@inheritDoc}
 		 */
 		@Override
-		protected void decode() {
+		protected void decode() throws IOException {
 
 			// Sound decoding components
 			ByteBuffer chunkheaderbytes = ByteBuffer.allocate(VqaChunkHeader.CHUNK_SIZE);
@@ -410,7 +411,7 @@ public class VqaFile extends AbstractFile implements VideoFile {
 		 */
 		@Override
 		@SuppressWarnings("incomplete-switch")
-		protected void decode() {
+		protected void decode() throws IOException {
 
 			// Image decoding components
 			ByteBuffer chunkheaderbytes = ByteBuffer.allocate(VqaChunkHeader.CHUNK_SIZE);

@@ -59,7 +59,8 @@ subprojects {
 				)
 			}
 			compile(
-				'org.slf4j:slf4j-api:1.6.6'
+				'org.slf4j:slf4j-api:1.6.6',
+				'org.thymeleaf:thymeleaf:3.0.0.RELEASE',
 			)
 			runtime(
 				'ch.qos.logback:logback-classic:1.0.3',

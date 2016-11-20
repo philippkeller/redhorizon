@@ -31,6 +31,7 @@ import redhorizon.utilities.ImageUtility;
 import redhorizon.utilities.channels.ReadableByteChannelAdapter;
 import static redhorizon.filetypes.ColourFormat.FORMAT_RGB;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.GatheringByteChannel;
 import java.nio.channels.ReadableByteChannel;
@@ -65,7 +66,7 @@ public class CpsFile extends AbstractFile implements ImageFile, Paletted, Palett
 	 * @param name		  Name of the CPS file.
 	 * @param bytechannel Data of the cps file.
 	 */
-	public CpsFile(String name, ReadableByteChannel bytechannel) {
+	public CpsFile(String name, ReadableByteChannel bytechannel) throws IOException {
 
 		super(name);
 
@@ -103,7 +104,7 @@ public class CpsFile extends AbstractFile implements ImageFile, Paletted, Palett
 	 * @param imagefile {@link ImageFile} instance.
 	 * @param params	Additional parameters: unpaletted (opt).
 	 */
-	private CpsFile(String name, ImageFile imagefile, String... params) {
+	private CpsFile(String name, ImageFile imagefile, String... params) throws IOException {
 
 		super(name);
 
@@ -142,7 +143,7 @@ public class CpsFile extends AbstractFile implements ImageFile, Paletted, Palett
 	 * @param pcxfile PCX file to draw data from.
 	 * @param params  Additional parameters: unpaletted (opt).
 	 */
-	public CpsFile(String name, PcxFile pcxfile, String... params) {
+	public CpsFile(String name, PcxFile pcxfile, String... params) throws IOException {
 
 		this(name, (ImageFile)pcxfile, params);
 	}
@@ -232,7 +233,7 @@ public class CpsFile extends AbstractFile implements ImageFile, Paletted, Palett
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void write(GatheringByteChannel outputchannel) {
+	public void write(GatheringByteChannel outputchannel) throws IOException {
 
 		try {
 			// Encode image

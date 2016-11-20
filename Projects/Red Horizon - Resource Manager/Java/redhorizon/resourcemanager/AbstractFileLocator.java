@@ -18,6 +18,7 @@ package redhorizon.resourcemanager;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public abstract class AbstractFileLocator implements ResourceLocator {
 	 * 		   file could not be found.
 	 */
 	@Override
-	public FileChannel locate(String name) {
+	public FileChannel locate(String name) throws IOException {
 
 		if (allfiles == null) {
 			allfiles = new ArrayList<>();

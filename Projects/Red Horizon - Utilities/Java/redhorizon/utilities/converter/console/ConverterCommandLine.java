@@ -25,6 +25,7 @@ import redhorizon.utilities.converter.UnsupportedConversionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 
 /**
@@ -80,7 +81,7 @@ public class ConverterCommandLine {
 	 * 
 	 * @param args Command-line parameters.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		// Check for minimum number of parameters, exit with code of 1 to let
 		// batch program display 'proper use' text

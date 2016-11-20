@@ -112,7 +112,7 @@ public abstract class AbstractPalette implements Palette {
 	 * @param format	  Colour format of the palette.
 	 * @param bytechannel Palette data.
 	 */
-	protected AbstractPalette(int size, ColourFormat format, ReadableByteChannel bytechannel) {
+	protected AbstractPalette(int size, ColourFormat format, ReadableByteChannel bytechannel) throws IOException {
 
 		this.size    = size;
 		this.format  = format;

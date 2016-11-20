@@ -16,6 +16,7 @@
 
 package redhorizon.filetypes;
 
+import java.io.IOException;
 import java.nio.channels.GatheringByteChannel;
 
 /**
@@ -30,5 +31,5 @@ public interface WritableFile extends File {
 	 * 
 	 * @param outputchannel File destination.
 	 */
-	public void write(GatheringByteChannel outputchannel);
+	public void write(GatheringByteChannel outputchannel) throws IOException;
 }

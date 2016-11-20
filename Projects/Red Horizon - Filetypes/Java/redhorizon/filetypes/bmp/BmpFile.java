@@ -26,6 +26,7 @@ import static redhorizon.filetypes.ColourFormat.FORMAT_RGB;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
@@ -50,7 +51,7 @@ public class BmpFile extends AbstractFile implements ImageFile {
 	 * @param name		  Name of the bitmap.
 	 * @param bytechannel Source data of the bitmap.
 	 */
-	public BmpFile(String name, ReadableByteChannel bytechannel) {
+	public BmpFile(String name, ReadableByteChannel bytechannel) throws IOException {
 
 		super(name);
 

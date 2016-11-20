@@ -132,7 +132,7 @@ public class ShpFileDune2 extends ShpFile<ShpFileHeaderDune2> implements Writabl
 	 * @param name		  The name of this file.
 	 * @param filechannel The data for this file.
 	 */
-	public ShpFileDune2(String name, FileChannel filechannel) {
+	public ShpFileDune2(String name, FileChannel filechannel) throws IOException {
 
 		super(name);
 
@@ -206,7 +206,7 @@ public class ShpFileDune2 extends ShpFile<ShpFileHeaderDune2> implements Writabl
 	 * @param imagefile File to source data from.
 	 * @param params	Additonal parameters: width, height, numimgs.
 	 */
-	public ShpFileDune2(String name, ImageFile imagefile, String... params) {
+	public ShpFileDune2(String name, ImageFile imagefile, String... params) throws IOException {
 
 		super(name);
 
@@ -264,7 +264,7 @@ public class ShpFileDune2 extends ShpFile<ShpFileHeaderDune2> implements Writabl
 	 * @param imagefiles Files to source data from.
 	 * @param params	 Additional parameters: create faction map.
 	 */
-	public ShpFileDune2(String name, ImageFile[] imagefiles, String... params) {
+	public ShpFileDune2(String name, ImageFile[] imagefiles, String... params) throws IOException {
 
 		super(name);
 
@@ -475,7 +475,7 @@ public class ShpFileDune2 extends ShpFile<ShpFileHeaderDune2> implements Writabl
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void write(GatheringByteChannel outputchannel) {
+	public void write(GatheringByteChannel outputchannel) throws IOException {
 
 		int numimgs = numImages();
 		int preoffsetsize = (numimgs + 1) * shpfileheader.offsetsize;

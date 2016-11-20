@@ -28,6 +28,7 @@ import static redhorizon.filetypes.SoundBitrate.*;
 import static redhorizon.filetypes.SoundChannels.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.Pipe;
@@ -67,7 +68,7 @@ public class AudFile extends AbstractFile implements SoundFile {
 	 * @param name		  The name of this file.
 	 * @param bytechannel Data of this aud file.
 	 */
-	public AudFile(String name, ReadableByteChannel bytechannel) {
+	public AudFile(String name, ReadableByteChannel bytechannel) throws IOException {
 
 		super(name);
 
@@ -114,7 +115,7 @@ public class AudFile extends AbstractFile implements SoundFile {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void close() {
+	public void close() throws IOException {
 
 		bytechannel.close();
 		decoderthreadpool.shutdownNow();
@@ -133,7 +134,7 @@ public class AudFile extends AbstractFile implements SoundFile {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public ReadableByteChannel getSoundData() {
+	public ReadableByteChannel getSoundData() throws IOException {
 
 		Pipe pipe = Pipe.open();
 		decoderthreadpool.execute(new SoundDataDecoder(
@@ -166,7 +167,7 @@ public class AudFile extends AbstractFile implements SoundFile {
 		 * 				 sample values respectively.
 		 * @return Decoded sound data.
 		 */
-		private ByteBuffer decodeChunk(AudChunkHeader chunkheader, int[] update) {
+		private ByteBuffer decodeChunk(AudChunkHeader chunkheader, int[] update) throws IOException {
 
 			// Build buffers from chunk header
 			ByteBuffer source = ByteBuffer.allocate(chunkheader.filesize & 0xffff);
@@ -190,7 +191,7 @@ public class AudFile extends AbstractFile implements SoundFile {
 		 * Perform decoding of the sound data.
 		 */
 		@Override
-		protected void decode() {
+		protected void decode() throws IOException {
 
 			ByteBuffer chunkheaderbytes = ByteBuffer.allocate(AudChunkHeader.CHUNK_HEADER_SIZE);
 			int[] update = new int[2];

@@ -88,8 +88,12 @@ public abstract class FileConverter {
 				fromfileconst = fromclass.getConstructor(String.class, FileChannel.class);
 			}
 
-			File inputfile = (File)fromfileconst.newInstance(inputfilename, inputfilechannel);
-			return inputfile;
+			try {
+				File inputfile = (File) fromfileconst.newInstance(inputfilename, inputfilechannel);
+				return inputfile;
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
 		}
 	}
 
@@ -136,6 +140,8 @@ public abstract class FileConverter {
 			}
 			outputfile.write(outputfilechannel);
 			return outputfile;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 

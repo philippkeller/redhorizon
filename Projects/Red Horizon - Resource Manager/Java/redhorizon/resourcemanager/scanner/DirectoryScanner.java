@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.regex.Pattern;
 
@@ -64,7 +65,7 @@ public class DirectoryScanner {
 	 * Starts a scan from the directory, notifying any registered listeners as
 	 * necessary.
 	 */
-	public void scan() {
+	public void scan() throws IOException {
 
 		scan(directory);
 	}
@@ -75,7 +76,7 @@ public class DirectoryScanner {
 	 * 
 	 * @param dir
 	 */
-	private void scan(File dir) {
+	private void scan(File dir) throws IOException {
 
 		logger.info("Scanning files in directory {}", dir.getAbsolutePath());
 		File[] files = dir.listFiles();

@@ -46,7 +46,7 @@ public abstract class Launcher extends Window {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		// Create a new launcher
 		final Launcher launcher = new LauncherSWT();

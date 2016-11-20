@@ -32,6 +32,7 @@ import org.eclipse.swt.widgets.MenuItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -54,19 +55,23 @@ public class ConverterUI extends ApplicationWindow {
 	 * 
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		logger.info("Starting Converter UI...");
 
 		// Initialize the program
-		SplashScreen splashscreen = new SplashScreen(ConverterUI.class.getClassLoader()
-				.getResourceAsStream("Launcher_SplashScreen.png"),
-				"Red Horizon File Conversion Utility", "0.30");
-		splashscreen.addTask(new LoadModRedAlertTask());
-		splashscreen.open();
+		try {
+			SplashScreen splashscreen = new SplashScreen(ConverterUI.class.getClassLoader()
+					.getResourceAsStream("Launcher_SplashScreen.png"),
+					"Red Horizon File Conversion Utility", "0.30");
+			splashscreen.addTask(new LoadModRedAlertTask());
+			splashscreen.open();
 
-		ConverterUI converterui = new ConverterUI();
-		converterui.open();
+			ConverterUI converterui = new ConverterUI();
+			converterui.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

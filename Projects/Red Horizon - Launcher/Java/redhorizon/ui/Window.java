@@ -42,6 +42,11 @@ public abstract class Window {
 		shell = new Shell(display, swthints);
 	}
 
+	protected Window() {
+		display = Display.getDefault();
+		shell = new Shell(display);
+	}
+
 	/**
 	 * Close the window.
 	 */

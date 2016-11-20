@@ -16,6 +16,7 @@
 
 package redhorizon.filetypes;
 
+import java.io.IOException;
 import java.nio.channels.ReadableByteChannel;
 
 /**
@@ -32,7 +33,7 @@ public interface ImagesFile extends ImageCommon, File {
 	 * 
 	 * @return Image data for each image.
 	 */
-	public ReadableByteChannel getImagesData();
+	public ReadableByteChannel getImagesData() throws IOException;
 
 	/**
 	 * Returns the number of images in this file.

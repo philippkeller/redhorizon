@@ -16,6 +16,7 @@
 
 package redhorizon.filetypes;
 
+import java.io.IOException;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 
@@ -46,7 +47,7 @@ public abstract class StreamingDataDecoder implements Runnable {
 	 * Decodes the file data in a streaming manner, reading from the provided
 	 * input channel and writing to the output channel.
 	 */
-	protected abstract void decode();
+	protected abstract void decode() throws IOException;
 
 	/**
 	 * Template implementation for a decoding thread.  Takes care of setting the
@@ -59,10 +60,16 @@ public abstract class StreamingDataDecoder implements Runnable {
 		Thread.currentThread().setName(threadName());
 		try {
 			decode();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		finally {
-			inputchannel.close();
-			outputchannel.close();
+			try {
+				inputchannel.close();
+				outputchannel.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

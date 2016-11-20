@@ -35,7 +35,7 @@ import java.util.ServiceLoader;
  * @author Emanuel Rabina
  * @version 1.0
  */
-public abstract class ErrorMessage implements Window {
+public abstract class ErrorMessage extends Window {
 
 	private static ServiceLoader<ErrorMessage> serviceloader;
 

@@ -21,6 +21,7 @@ import redhorizon.filetypes.ArchiveFile;
 import redhorizon.filetypes.FileExtensions;
 import redhorizon.filetypes.AbstractFile;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
@@ -57,7 +58,7 @@ public class MixFile extends AbstractFile implements ArchiveFile<MixRecord> {
 	 * @param filename	  Name of the mix file.
 	 * @param filechannel The mix file proper.
 	 */
-	public MixFile(String filename, FileChannel filechannel) {
+	public MixFile(String filename, FileChannel filechannel) throws IOException {
 
 		super(filename);
 		this.filechannel = filechannel;
@@ -162,7 +163,7 @@ public class MixFile extends AbstractFile implements ArchiveFile<MixRecord> {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void close() {
+	public void close() throws IOException {
 
 		filechannel.close();
 	}

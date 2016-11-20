@@ -21,6 +21,8 @@ import redhorizon.ui.SplashScreenTask;
 
 import org.junit.Test;
 
+import java.io.IOException;
+
 /**
  * Starts, runs, then shuts down the game engine.
  * 
@@ -30,22 +32,25 @@ public class EngineTest {
 
 	@Test
 	public void launchEngine() {
+		try {
+			// Open up a splash screen
+			SplashScreen splashscreen = new SplashScreen(EngineTest.class.getClassLoader()
+					.getResourceAsStream("Launcher_SplashScreen.png"),
+					"Red Horizon Engine Test", "0.30");
+			splashscreen.addTask(new SplashScreenTask() {
+				@Override
+				public String taskText() {
+					return "Starting Red Horizon game engine";
+				}
 
-		// Open up a splash screen
-		SplashScreen splashscreen = new SplashScreen(EngineTest.class.getClassLoader()
-				.getResourceAsStream("Launcher_SplashScreen.png"),
-				"Red Horizon Engine Test", "0.30");
-		splashscreen.addTask(new SplashScreenTask() {
-			@Override
-			public String taskText() {
-				return "Starting Red Horizon game engine";
-			}
-			@Override
-			public void doTask() {
-				new GameEngine().start();
-			}
-		});
-		splashscreen.open();
-
+				@Override
+				public void doTask() {
+					new GameEngine().start();
+				}
+			});
+			splashscreen.open();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

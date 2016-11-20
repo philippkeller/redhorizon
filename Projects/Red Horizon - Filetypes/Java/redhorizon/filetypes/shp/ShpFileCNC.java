@@ -27,6 +27,7 @@ import redhorizon.utilities.CodecUtility;
 import redhorizon.utilities.ImageUtility;
 import static redhorizon.filetypes.ColourFormat.FORMAT_INDEXED;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.GatheringByteChannel;
 import java.nio.channels.ReadableByteChannel;
@@ -55,7 +56,7 @@ public class ShpFileCNC extends ShpFile<ShpFileHeaderCNC> implements AnimationFi
 	 * @param name		  The name of this file.
 	 * @param bytechannel Data of the file.
 	 */
-	public ShpFileCNC(String name, ReadableByteChannel bytechannel) {
+	public ShpFileCNC(String name, ReadableByteChannel bytechannel) throws IOException {
 
 		super(name);
 
@@ -128,7 +129,7 @@ public class ShpFileCNC extends ShpFile<ShpFileHeaderCNC> implements AnimationFi
 	 * @param imagefile File to source data from.
 	 * @param params	Additional parameters: width, height, numimgs.
 	 */
-	public ShpFileCNC(String name, ImageFile imagefile, String... params) {
+	public ShpFileCNC(String name, ImageFile imagefile, String... params) throws IOException {
 
 		super(name);
 
@@ -246,7 +247,7 @@ public class ShpFileCNC extends ShpFile<ShpFileHeaderCNC> implements AnimationFi
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void write(GatheringByteChannel outputchannel) {
+	public void write(GatheringByteChannel outputchannel) throws IOException {
 
 		try {
 			int numimages = numImages();

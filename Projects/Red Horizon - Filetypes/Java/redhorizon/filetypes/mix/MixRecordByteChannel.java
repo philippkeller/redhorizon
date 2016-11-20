@@ -18,6 +18,7 @@ package redhorizon.filetypes.mix;
 
 import redhorizon.utilities.channels.AbstractDuplicateReadOnlyByteChannel;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
@@ -62,7 +63,7 @@ public class MixRecordByteChannel extends AbstractDuplicateReadOnlyByteChannel {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int read(ByteBuffer dst) {
+	public int read(ByteBuffer dst) throws IOException {
 
 		// Prevent the read from going beyond the upper bound of the file entry
 		int remaining = (int)(upperbound - position);

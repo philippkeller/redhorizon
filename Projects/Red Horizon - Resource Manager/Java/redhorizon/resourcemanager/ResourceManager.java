@@ -19,6 +19,7 @@ package redhorizon.resourcemanager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayDeque;
@@ -62,9 +63,12 @@ public class ResourceManager {
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override
 			public void run() {
-				for (ResourceLocator locator: locators) {
-					locator.close();
-				}
+				for (ResourceLocator locator: locators)
+					try {
+						locator.close();
+					} catch (IOException e) {
+
+					}
 			}
 		});
 	}
@@ -118,7 +122,7 @@ public class ResourceManager {
 	 * @param name Name of the resource to locate.
 	 * @return The resource, or <tt>null</tt> if it couldn't be found.
 	 */
-	public static ReadableByteChannel locateResource(String name) {
+	public static ReadableByteChannel locateResource(String name) throws IOException {
 
 		// Check cache first for resource
 		if (locatorcache.containsKey(name)) {
@@ -147,7 +151,7 @@ public class ResourceManager {
 	 * @return The resource, or <tt>null</tt> if it could not be loaded.
 	 */
 	@SuppressWarnings("unchecked")
-	public static <R> R loadResource(String name, Class<R> type) {
+	public static <R> R loadResource(String name, Class<R> type) throws IOException {
 
 		R resource = null;
 

@@ -17,6 +17,7 @@
 package redhorizon.resourcemanager;
 
 import java.io.Closeable;
+import java.io.IOException;
 import java.nio.channels.ReadableByteChannel;
 
 /**
@@ -34,5 +35,5 @@ public interface ResourceLocator extends Closeable {
 	 * @return A byte channel into the resource with the specified name, or
 	 * 		   <tt>null</tt> if the resource could not be found.
 	 */
-	public ReadableByteChannel locate(String name);
+	public ReadableByteChannel locate(String name) throws IOException;
 }
